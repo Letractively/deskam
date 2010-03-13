@@ -36,11 +36,12 @@ Section "Deskam (required)"
   SetOutPath $INSTDIR
   
   ; Put file there
-  File "Debug/deskam.exe"
-  File "Debug/deskam.ax"
+  File "Release\deskam.exe"
+  File "Release\deskam.ax"
+  RegDLL "$INSTDIR\deskam.ax"
   
   ; Write the installation path into the registry
-  WriteRegStr HKLM SOFTWARE\Deskam "Install_Dir" "$INSTDIR"
+  WriteRegStr HKLM "SOFTWARE\Deskam" "InstallDir" "$INSTDIR"
   
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Deskam" "DisplayName" "Deskam"
@@ -68,12 +69,13 @@ Section "un.Uninstall"
   
   ; Remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Deskam"
-  DeleteRegKey HKLM SOFTWARE\Deskam
+  DeleteRegKey HKLM "SOFTWARE\Deskam"
 
   ; Remove files and uninstaller
-  Delete $INSTDIR\deskam.exe
-  Delete $INSTDIR\deskam.ax
-  Delete $INSTDIR\uninstall.exe
+  UnRegDLL "$INSTDIR\deskam.ax"
+  Delete "$INSTDIR\deskam.exe"
+  Delete "$INSTDIR\deskam.ax"
+  Delete "$INSTDIR\uninstall.exe"
 
   ; Remove shortcuts, if any
   Delete "$SMPROGRAMS\Deskam\*.*"
