@@ -1,0 +1,1 @@
+Deskam allows you to use a portion of your screen as a web-cam, this can be useful for sharing your screen over normal web-conferencing software or for screen-casting over websites such as ustream.tv or justin.tv.
